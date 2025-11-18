@@ -1,0 +1,83 @@
+
+Wykrycie Duplikatow
+	SELECT id, imie, nazwisko, COUNT(*) AS liczba_wpisow,
+       		STRING_AGG(CONVERT(varchar, data_u), ', ') AS daty_urodzenia
+	FROM pracownicy
+	GROUP BY id, imie, nazwisko
+	HAVING COUNT(DISTINCT data_u) > 1;
+
+
+Usuniecie Duplikatow
+	WITH duplikaty AS (
+    	SELECT *,
+           	ROW_NUMBER() OVER (PARTITION BY id ORDER BY data_u) AS rn
+    	FROM pracownicy
+	)
+DELETE FROM duplikaty WHERE rn > 1;
+
+Zapobieganie Duplikatom 
+	ALTER TABLE pracownicy
+	ADD CONSTRAINT pk_pracownicy PRIMARY KEY (id);
+
+
+
+
+
+Baza Danych
+CREATE TABLE pracownicy (
+    id INT,
+    imie VARCHAR(50),
+    nazwisko VARCHAR(50),
+    stanowisko VARCHAR(50),
+    pesel CHAR(11),
+    data_urodzenia DATE
+);
+
+
+INSERT INTO pracownicy (id, imie, nazwisko, stanowisko, pesel, data_urodzenia) VALUES
+(1, 'Anna', 'Kowalska', 'Nauczyciel', '90010112345', '1990-01-01'),
+(2, 'Jan', 'Nowak', 'Dyrektor', '85050567890', '1985-05-05'),
+(3, 'Maria', 'Wiśniewska', 'Sekretarka', '92030345678', '1992-03-03'),
+(4, 'Piotr', 'Zieliński', 'Nauczyciel', '88070798765', '1988-07-07'),
+
+(7, 'Ewa', 'Kaczmarek', 'Bibliotekarka', '97040433333', '1997-04-04'),
+(8, 'Michał', 'Mazur', 'Nauczyciel', '89090944444', '1989-09-09'),
+(10, 'Robert', 'Sikora', 'Nauczyciel WF', '86060666666', '1986-06-06'),
+(11, 'Joanna', 'Król', 'Sekretarka', '94070777777', '1994-07-07'),
+(12, 'Paweł', 'Lis', 'Nauczyciel Matematyki', '82020288888', '1982-02-02'),
+
+ duplikaty ID z różnymi datami urodzenia
+
+(5, 'Katarzyna', 'Lewandowska', 'Pedagog', '93090911111', '1993-09-09'),
+(5, 'Katarzyna', 'Lewandowska', 'Pedagog', '93090911111', '1980-01-01'),
+
+(6, 'Tomasz', 'Wójcik', 'Woźny', '95020222222', '1995-02-02'),
+(6, 'Tomasz', 'Wójcik', 'Woźny', '95020222222', '1970-12-12');
+
+(9, 'Agnieszka', 'Baran', 'Psycholog', '91010155555', '1991-01-01'),
+(9, 'Agnieszka', 'Baran', 'Psycholog', '91010155555', '1975-12-12');
+
+
+
+
+Wykrycie Duplikatow
+ 	SELECT id, imie, nazwisko, COUNT(*) AS liczba_wpisow,
+       		STRING_AGG(CONVERT(varchar, data_u), ', ') AS daty_urodzenia
+ 	FROM pracownicy
+ 	GROUP BY id, imie, nazwisko
+ 	HAVING COUNT(DISTINCT data_u) > 1;
+
+
+Usuniecie Duplikatow
+ 	WITH duplikaty AS (
+    	SELECT *,
+           	ROW_NUMBER() OVER (PARTITION BY id ORDER BY data_u) AS rn
+    	FROM pracownicy
+ 	)
+DELETE FROM duplikaty WHERE rn > 1;
+
+Zapobieganie Duplikatom
+ 	ALTER TABLE pracownicy
+ 	ADD CONSTRAINT pk_pracownicy PRIMARY KEY (id);
+
+
