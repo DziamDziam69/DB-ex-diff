@@ -1,0 +1,50 @@
+
+CREATE TABLE pracownicy ( id INT, imie VARCHAR(50), nazwisko VARCHAR(50), stanowisko VARCHAR(50), pesel CHAR(11), data_urodzenia DATE );
+
+PRAWDZIWE:
+INSERT INTO osoby VALUES (1,'Anna','Kowalska','98041212345','1998-04-12'); 
+INSERT INTO osoby VALUES (3,'Julia','Wiśniewska','02071545678','2002-07-15'); 
+INSERT INTO osoby VALUES (4,'Piotr','Mazur','88010111223','1988-01-01'); 
+INSERT INTO osoby VALUES (6,'Karol','Sikora','05093011234','2005-09-30'); 
+INSERT INTO osoby VALUES (7,'Ewa','Zielińska','99031155443','1999-03-11'); 
+INSERT INTO osoby VALUES (8,'Paweł','Dąbrowski','91081288764','1991-08-12'); 
+INSERT INTO osoby VALUES (9,'Kamil','Lewandowski','04050544321','2004-05-05'); 
+INSERT INTO osoby VALUES (10,'Ola','Kaczmarek','07121211298','2007-12-12'); 
+INSERT INTO osoby VALUES (11,'Filip','Król','00100122334','2000-10-01'); 
+INSERT INTO osoby VALUES (13,'Adam','Piasecki','92052466543','1992-05-24'); 
+INSERT INTO osoby VALUES (14,'Tomasz','Urban','86010133221','1986-01-01'); 
+INSERT INTO osoby VALUES (15,'Kinga','Baran','04032198765','2004-03-21'); 
+INSERT INTO osoby VALUES (17,'Jacek','Lis','99062233445','1999-06-22'); 
+INSERT INTO osoby VALUES (18,'Michał','Kaźmierczak','95090956432','1995-09-09'); 
+INSERT INTO osoby VALUES (19,'Sara','Błaszczyk','07110422334','2007-11-04'); 
+INSERT INTO osoby VALUES (21,'Dominik','Mróz','02061611223','2002-06-16'); 
+INSERT INTO osoby VALUES (22,'Barbara','Stępień','81020154321','1981-02-01'); 
+INSERT INTO osoby VALUES (23,'Patryk','Sowa','99072088761','1999-07-20'); 
+INSERT INTO osoby VALUES (25,'Nadia','Gajewska','06120277654','2006-12-02'); 
+INSERT INTO osoby VALUES (26,'Weronika','Kubiak','09100974836','2009-10-09'); 
+INSERT INTO osoby VALUES (27,'Sebastian','Śliwa','93020144322','1993-02-01'); 
+INSERT INTO osoby VALUES (28,'Maria','Wójcik','73050199887','1973-05-01');
+INSERT INTO osoby VALUES (30,'Marek','Nowak','95022398765','1995-02-23');  
+
+
+DUPLIKATY:
+INSERT INTO osoby VALUES (2,'Natalia','Wrońska','9409091122','1994-09-09');
+INSERT INTO osoby VALUES (5,'Katarzyna','Borkowska','123456789012','2001-08-28');
+INSERT INTO osoby VALUES (12,'Rafał','Rutkowski','970315','1997-03-15');
+INSERT INTO osoby VALUES (16,'Magdalena','Kwiatkowska','0310201234','2003-10-20');
+INSERT INTO osoby VALUES (20,'Łukasz','Jankowski','9011119876543','1990-11-11');
+INSERT INTO osoby VALUES (24,'Aleksandra','Wolska','880707','1988-07-07');
+INSERT INTO osoby VALUES (29,'Krzysztof','Chmielewski','060101123','2006-01-01');
+
+SELECT * FROM pracownicy WHERE LENGTH(pesel) <> 11 OR pesel IS NULL;
+
+Analiza Danych: Operacja "CryptInfo"
+W bazie danych SQLITE znajdują się dane pracowników, które mają być analizowane. 
+Część z tych danych została zmanipulowana. Firma CryptInfo generuje automatyczne 
+raporty dotyczące "stabilności zatrudnienia", które, jak się okazuje, są kompletnym fałszem.
+Twoim zadaniem jest zidentyfikowanie osób, których dane w bazie są podejrzane. 
+Zacznij od sprawdzenia poprawności numerów PESEL. Wykorzystaj zapytanie SQL, 
+aby zidentyfikować pracowników z nieprawidłowymi numerami PESEL.
+Dodatkowe wskazówki:
+Skup się na identyfikacji nieprawidłowości w danych.
+Zastanów się, jakie inne aspekty danych mogą być zmanipulowane.
